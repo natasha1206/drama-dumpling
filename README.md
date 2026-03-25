@@ -156,6 +156,8 @@ TMDB is blocked by some Indian ISPs (like Jio and Airtel). This app uses a free 
 ---
 
 ## 📁 Project Structure
+
+```
 drama-dumpling/
 ├── index.html # Web app (root)
 ├── app.js # Web app logic
@@ -165,7 +167,7 @@ drama-dumpling/
 │ ├── popup.js # Extension logic
 │ └── icons/ # Extension icons
 └── README.md # This file
-
+```
 
 ---
 
@@ -234,9 +236,13 @@ Contributions are welcome! Here's how you can help:
     ```
 5. Open a Pull Request
 
+---
+
 ## License
 
 This project is licensed under the MIT License.
+
+---
 
 ## Acknowledgements
 
@@ -247,6 +253,8 @@ This project is licensed under the MIT License.
 - RSS2JSON for RSS feed conversion
 
 - All C-drama lovers who inspired this project!
+
+---
 
 ## 💗 Support
 
@@ -260,4 +268,6 @@ If you enjoy using Drama Dumpling:
 
 - 📣 Share with friends who love C-dramas!
 
-<p align="center"> Made with 💗 for C-drama lovers everywhere </p><p align="center"> <sub>Powered by TMDB</sub> </p> ```
+---
+
+<p align="center"> Made with 💗 for C-drama lovers everywhere </p><p align="center"> <sub>Powered by TMDB</sub> </p>
