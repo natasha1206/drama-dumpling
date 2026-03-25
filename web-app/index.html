@@ -1,0 +1,1133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#2d2a2a">
+  <meta name="description" content="Discover Chinese dramas based on your mood!">
+  <title>Drama Dumpling 🥟 | Find Your Next C-Drama</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #2a2424 0%, #3a2c2c 50%, #2d2424 100%);
+      font-family: 'Segoe UI', 'Quicksand', -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+      color: #f5e6e0;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Dumpling Pattern Background */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(255, 183, 195, 0.03) 2px, transparent 2px),
+        radial-gradient(circle at 85% 70%, rgba(255, 212, 165, 0.03) 1px, transparent 1px),
+        radial-gradient(circle at 40% 90%, rgba(255, 154, 158, 0.02) 3px, transparent 3px),
+        repeating-linear-gradient(45deg, rgba(255, 183, 195, 0.02) 0px, rgba(255, 183, 195, 0.02) 2px, transparent 2px, transparent 8px);
+      background-size: 40px 40px, 30px 30px, 50px 50px, 20px 20px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Soft Glow Effect */
+    body::after {
+      content: '';
+      position: fixed;
+      top: -50%;
+      left: -50%;
+      right: -50%;
+      bottom: -50%;
+      background: radial-gradient(ellipse at center, rgba(255, 183, 195, 0.05) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+      animation: softGlow 15s ease-in-out infinite;
+    }
+
+    @keyframes softGlow {
+      0%, 100% {
+        opacity: 0.5;
+        transform: scale(1);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1.05);
+      }
+    }
+
+    /* Floating Dumpling Elements */
+    .floating-dumpling {
+      position: fixed;
+      font-size: 40px;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.15;
+      animation: floatDumpling 25s infinite ease-in-out;
+    }
+
+    .floating-dumpling:nth-child(1) {
+      top: 15%;
+      left: 5%;
+      animation-delay: 0s;
+      animation-duration: 28s;
+    }
+
+    .floating-dumpling:nth-child(2) {
+      bottom: 20%;
+      right: 3%;
+      font-size: 60px;
+      animation-delay: -5s;
+      animation-duration: 32s;
+      opacity: 0.12;
+    }
+
+    .floating-dumpling:nth-child(3) {
+      top: 65%;
+      left: 85%;
+      font-size: 30px;
+      animation-delay: -12s;
+      animation-duration: 24s;
+    }
+
+    .floating-dumpling:nth-child(4) {
+      top: 80%;
+      left: 15%;
+      font-size: 50px;
+      animation-delay: -20s;
+      animation-duration: 35s;
+    }
+
+    .floating-dumpling:nth-child(5) {
+      top: 10%;
+      right: 20%;
+      font-size: 45px;
+      animation-delay: -8s;
+      animation-duration: 30s;
+    }
+
+    @keyframes floatDumpling {
+      0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+      }
+      25% {
+        transform: translateY(-20px) rotate(5deg);
+      }
+      75% {
+        transform: translateY(15px) rotate(-3deg);
+      }
+    }
+
+    /* Cherry Blossom Petals */
+    .petal {
+      position: fixed;
+      background: radial-gradient(circle, rgba(255, 183, 195, 0.4) 0%, rgba(255, 154, 158, 0.2) 100%);
+      border-radius: 50% 0 50% 50%;
+      width: 12px;
+      height: 12px;
+      pointer-events: none;
+      z-index: 0;
+      animation: fallPetal 12s linear infinite;
+      opacity: 0.4;
+    }
+
+    .petal:nth-child(6) {
+      left: 10%;
+      animation-duration: 14s;
+      animation-delay: 0s;
+      width: 10px;
+      height: 10px;
+    }
+
+    .petal:nth-child(7) {
+      left: 25%;
+      animation-duration: 10s;
+      animation-delay: -3s;
+      width: 8px;
+      height: 8px;
+    }
+
+    .petal:nth-child(8) {
+      left: 45%;
+      animation-duration: 16s;
+      animation-delay: -7s;
+      width: 12px;
+      height: 12px;
+    }
+
+    .petal:nth-child(9) {
+      left: 70%;
+      animation-duration: 11s;
+      animation-delay: -2s;
+      width: 9px;
+      height: 9px;
+    }
+
+    .petal:nth-child(10) {
+      left: 85%;
+      animation-duration: 13s;
+      animation-delay: -5s;
+      width: 7px;
+      height: 7px;
+    }
+
+    @keyframes fallPetal {
+      0% {
+        top: -10%;
+        transform: rotate(0deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.4;
+      }
+      90% {
+        opacity: 0.4;
+      }
+      100% {
+        top: 110%;
+        transform: rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    /* Subtle Grain Texture */
+    .grain {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.3;
+    }
+
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      padding: 60px 20px 40px;
+      background: linear-gradient(135deg, rgba(45,36,36,0.95) 0%, rgba(31,24,24,0.9) 100%);
+      border-bottom: 1px solid rgba(255, 183, 195, 0.3);
+      position: relative;
+      z-index: 1;
+      backdrop-filter: blur(5px);
+    }
+
+    .hero h1 {
+      font-size: 56px;
+      font-weight: 800;
+      background: linear-gradient(135deg, #ffb7c3 0%, #ffd4a5 50%, #ff9a9e 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 16px;
+      letter-spacing: 2px;
+      animation: fadeInDown 0.8s ease;
+    }
+
+    .hero p {
+      font-size: 18px;
+      color: #e0c8bc;
+      max-width: 500px;
+      margin: 0 auto;
+      animation: fadeInUp 0.8s ease;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, rgba(255,183,195,0.3) 0%, rgba(255,154,158,0.2) 100%);
+      border-radius: 100px;
+      padding: 8px 20px;
+      font-size: 14px;
+      color: #ffb7c3;
+      margin-top: 20px;
+      animation: pulse 2s infinite;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .hero-badge:hover {
+      transform: scale(1.05);
+      background: linear-gradient(135deg, rgba(255,183,195,0.5) 0%, rgba(255,154,158,0.4) 100%);
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.8; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.05); }
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    /* Main Container */
+    .main-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Vibe Section */
+    .vibe-section {
+      background: rgba(45, 35, 35, 0.5);
+      backdrop-filter: blur(12px);
+      border-radius: 40px;
+      padding: 32px;
+      margin-bottom: 32px;
+      border: 1px solid rgba(255, 183, 195, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 28px;
+      animation: slideInLeft 0.6s ease;
+    }
+
+    @keyframes slideInLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .section-title span {
+      font-size: 36px;
+      animation: bounce 2s infinite;
+    }
+
+    .section-title h2 {
+      font-size: 26px;
+      font-weight: 600;
+      background: linear-gradient(135deg, #ffb7c3 0%, #ffd4a5 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .vibe-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 18px;
+    }
+
+    .vibe-card {
+      background: rgba(30, 25, 25, 0.7);
+      border: 1px solid #5a4040;
+      border-radius: 24px;
+      padding: 20px 12px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .vibe-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,183,195,0.2), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .vibe-card:hover::before {
+      left: 100%;
+    }
+
+    .vibe-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      border-color: #ffb7c3;
+      background: rgba(255, 183, 195, 0.15);
+      box-shadow: 0 15px 35px rgba(255, 154, 158, 0.2);
+    }
+
+    .vibe-card.active {
+      background: linear-gradient(135deg, #ff9a9e 0%, #ffb7c3 100%);
+      border-color: transparent;
+      animation: bounce 0.5s ease;
+    }
+
+    .vibe-card.active .vibe-emoji,
+    .vibe-card.active .vibe-name {
+      color: #2d2a2a;
+    }
+
+    .vibe-emoji {
+      font-size: 44px;
+      display: block;
+      margin-bottom: 12px;
+      transition: transform 0.3s ease;
+    }
+
+    .vibe-card:hover .vibe-emoji {
+      transform: scale(1.1);
+    }
+
+    .vibe-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: #f0d0c0;
+    }
+
+    /* Drama Section */
+    .drama-section {
+      background: rgba(45, 35, 35, 0.5);
+      backdrop-filter: blur(12px);
+      border-radius: 40px;
+      padding: 40px;
+      margin-bottom: 32px;
+      border: 1px solid rgba(255, 183, 195, 0.2);
+      transition: all 0.3s ease;
+      animation: fadeInUp 0.6s ease 0.2s both;
+    }
+
+    .drama-container {
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .poster-wrapper {
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    .poster-wrapper::after {
+      content: '';
+      position: absolute;
+      top: -10px;
+      left: -10px;
+      right: -10px;
+      bottom: -10px;
+      background: radial-gradient(circle, rgba(255,183,195,0.2) 0%, transparent 70%);
+      border-radius: 30px;
+      z-index: -1;
+      animation: pulse 3s infinite;
+    }
+
+    #poster {
+      width: 240px;
+      height: auto;
+      border-radius: 24px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    #poster:hover {
+      transform: scale(1.05) rotate(2deg);
+      box-shadow: 0 30px 50px rgba(0, 0, 0, 0.5);
+    }
+
+    .drama-info-large {
+      flex: 1;
+      min-width: 280px;
+      text-align: left;
+    }
+
+    #title {
+      font-size: 32px;
+      font-weight: 800;
+      background: linear-gradient(135deg, #ffd4a5 0%, #ffb7c3 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 16px;
+      line-height: 1.3;
+    }
+
+    .rating-large {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255, 183, 195, 0.15);
+      padding: 10px 24px;
+      border-radius: 50px;
+      margin: 20px 0;
+      backdrop-filter: blur(5px);
+    }
+
+    #rating {
+      font-size: 20px;
+      font-weight: 700;
+      color: #ffb7c3;
+      letter-spacing: 2px;
+    }
+
+    #vibe-tag {
+      display: inline-block;
+      background: linear-gradient(135deg, rgba(255,183,195,0.2) 0%, rgba(255,154,158,0.1) 100%);
+      padding: 8px 20px;
+      border-radius: 40px;
+      font-size: 13px;
+      color: #ffb7c3;
+      font-weight: 500;
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 20px;
+      margin-top: 32px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #ff9a9e 0%, #ffb7c3 100%);
+      color: #2d2a2a;
+      border: none;
+      padding: 14px 36px;
+      border-radius: 60px;
+      font-size: 16px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      font-family: inherit;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.5);
+      transform: translate(-50%, -50%);
+      transition: width 0.6s, height 0.6s;
+    }
+
+    .btn-primary:active::after {
+      width: 300px;
+      height: 300px;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 0 12px 28px rgba(255, 154, 158, 0.5);
+    }
+
+    .btn-secondary {
+      background: rgba(30, 25, 25, 0.8);
+      color: #ffb7c3;
+      border: 2px solid #ffb7c3;
+      padding: 14px 36px;
+      border-radius: 60px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 183, 195, 0.2);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(255, 183, 195, 0.3);
+    }
+
+    .btn-primary:disabled,
+    .btn-secondary:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* Watchlist Section */
+    .watchlist-section {
+      background: rgba(45, 35, 35, 0.5);
+      backdrop-filter: blur(12px);
+      border-radius: 40px;
+      padding: 32px;
+      border: 1px solid rgba(255, 183, 195, 0.2);
+      animation: fadeInUp 0.6s ease 0.4s both;
+    }
+
+    .watchlist-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 28px;
+      padding-bottom: 20px;
+      border-bottom: 2px solid rgba(255, 183, 195, 0.2);
+    }
+
+    .watchlist-header h3 {
+      font-size: 26px;
+      font-weight: 700;
+      background: linear-gradient(135deg, #ffb7c3 0%, #ffd4a5 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .watchlist-count {
+      background: linear-gradient(135deg, #ff9a9e 0%, #ffb7c3 100%);
+      color: #2d2a2a;
+      padding: 8px 20px;
+      border-radius: 50px;
+      font-weight: 800;
+      font-size: 16px;
+      animation: pulse 2s infinite;
+    }
+
+    .watchlist-actions {
+      display: flex;
+      gap: 12px;
+    }
+
+    .icon-btn {
+      background: rgba(30, 25, 25, 0.8);
+      border: 1px solid #5a4040;
+      padding: 10px 24px;
+      border-radius: 50px;
+      font-size: 14px;
+      cursor: pointer;
+      color: #ffb7c3;
+      transition: all 0.3s ease;
+      font-weight: 500;
+    }
+
+    .icon-btn:hover {
+      background: rgba(255, 183, 195, 0.2);
+      border-color: #ffb7c3;
+      transform: translateY(-2px);
+    }
+
+    #watchlist {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 14px;
+    }
+
+    #watchlist li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 20px;
+      background: rgba(30, 25, 25, 0.6);
+      border-radius: 24px;
+      font-size: 14px;
+      color: #f0e0d0;
+      border: 1px solid #5a4040;
+      transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      animation: slideInRight 0.5s ease;
+    }
+
+    @keyframes slideInRight {
+      from {
+        opacity: 0;
+        transform: translateX(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    #watchlist li:hover {
+      border-color: #ffb7c3;
+      transform: translateX(8px) scale(1.01);
+      background: rgba(255, 183, 195, 0.1);
+    }
+
+    .remove-btn {
+      background: none;
+      border: none;
+      color: #ffb7c3;
+      cursor: pointer;
+      font-size: 22px;
+      padding: 0 8px;
+      transition: all 0.2s ease;
+      font-weight: 600;
+    }
+
+    .remove-btn:hover {
+      color: #ff6b6b;
+      transform: scale(1.2) rotate(90deg);
+    }
+
+    .vibe-badge {
+      font-size: 11px;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 4px 12px;
+      border-radius: 30px;
+      margin-left: 12px;
+    }
+
+    .empty-message {
+      text-align: center;
+      color: #d4a5a5;
+      padding: 60px;
+      font-size: 18px;
+      grid-column: 1 / -1;
+      animation: pulse 2s infinite;
+    }
+
+    /* News & Facts Section */
+    .news-section {
+      background: rgba(45, 35, 35, 0.5);
+      backdrop-filter: blur(12px);
+      border-radius: 40px;
+      padding: 28px;
+      margin-top: 20px;
+      border: 1px solid rgba(255, 183, 195, 0.2);
+    }
+
+    .news-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(255, 183, 195, 0.2);
+    }
+
+    .news-header h3 {
+      font-size: 20px;
+      font-weight: 700;
+      background: linear-gradient(135deg, #ffb7c3 0%, #ffd4a5 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .news-buttons {
+      display: flex;
+      gap: 10px;
+    }
+
+    .news-list {
+      max-height: 280px;
+      overflow-y: auto;
+      padding-right: 8px;
+    }
+
+    .news-item {
+      background: rgba(30, 25, 25, 0.6);
+      border-radius: 20px;
+      padding: 14px 18px;
+      margin-bottom: 12px;
+      transition: all 0.2s ease;
+      border-left: 3px solid #ffb7c3;
+      cursor: pointer;
+    }
+
+    .news-item:hover {
+      background: rgba(255, 183, 195, 0.1);
+      transform: translateX(4px);
+    }
+
+    .news-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #ffd4a5;
+      line-height: 1.4;
+      margin-bottom: 6px;
+    }
+
+    .news-source {
+      font-size: 11px;
+      color: #c99a9a;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .news-date {
+      font-size: 10px;
+      color: #b88a8a;
+    }
+
+    .fact-toast {
+      position: fixed;
+      bottom: 100px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, #2d2a2a, #1f1818);
+      color: #ffb7c3;
+      padding: 16px 24px;
+      border-radius: 60px;
+      font-size: 14px;
+      z-index: 10000;
+      animation: slideUpSmart 0.3s ease;
+      border: 1px solid #ffb7c3;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      max-width: 85%;
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    @keyframes slideUpSmart {
+      from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+      }
+    }
+
+    @keyframes slideDownSmart {
+      from {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+      }
+      to {
+        opacity: 0;
+        transform: translateX(-50%) translateY(30px);
+      }
+    }
+
+    .loading-news {
+      text-align: center;
+      padding: 40px;
+      color: #c99a9a;
+      font-style: italic;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 40px 24px 32px;
+      font-size: 13px;
+      color: #8a6e6e;
+      border-top: 1px solid rgba(255, 183, 195, 0.1);
+      margin-top: 40px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, #2d2a2a 0%, #1f1818 100%);
+      color: #ffb7c3;
+      padding: 14px 32px;
+      border-radius: 60px;
+      font-size: 14px;
+      z-index: 1000;
+      animation: slideUp 0.4s ease;
+      border: 1px solid #ffb7c3;
+      backdrop-filter: blur(10px);
+      font-weight: 500;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+      }
+    }
+
+    .error {
+      background: linear-gradient(135deg, rgba(255, 100, 100, 0.2) 0%, rgba(255, 107, 107, 0.1) 100%);
+      border: 1px solid #ff6b6b;
+      color: #ff9a9e;
+      padding: 14px 24px;
+      border-radius: 40px;
+      text-align: center;
+      margin-bottom: 24px;
+      animation: shake 0.5s ease;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      75% { transform: translateX(5px); }
+    }
+
+    /* Loading Animation */
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .loading-spinner {
+      text-align: center;
+      padding: 40px;
+    }
+
+    .loading-spinner::after {
+      content: '🥟';
+      font-size: 48px;
+      display: inline-block;
+      animation: spin 1s linear infinite;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 40px;
+      }
+      
+      .hero p {
+        font-size: 16px;
+      }
+      
+      .main-container {
+        padding: 24px 16px;
+      }
+      
+      .drama-container {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .drama-info-large {
+        text-align: center;
+      }
+      
+      #title {
+        font-size: 26px;
+      }
+      
+      .action-buttons {
+        justify-content: center;
+      }
+      
+      .vibe-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .section-title h2 {
+        font-size: 22px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero {
+        padding: 40px 16px 30px;
+      }
+      
+      .hero h1 {
+        font-size: 32px;
+      }
+      
+      .vibe-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      #poster {
+        width: 200px;
+      }
+      
+      .btn-primary, .btn-secondary {
+        padding: 12px 24px;
+        font-size: 14px;
+      }
+      
+      .watchlist-header h3 {
+        font-size: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Floating Dumplings -->
+  <div class="floating-dumpling">🥟</div>
+  <div class="floating-dumpling">🥟</div>
+  <div class="floating-dumpling">🥟</div>
+  <div class="floating-dumpling">🥟</div>
+  <div class="floating-dumpling">🥟</div>
+  
+  <!-- Falling Cherry Blossom Petals -->
+  <div class="petal"></div>
+  <div class="petal"></div>
+  <div class="petal"></div>
+  <div class="petal"></div>
+  <div class="petal"></div>
+  
+  <!-- Grain Texture -->
+  <div class="grain"></div>
+  
+  <div class="hero">
+    <h1>🥟 Drama Dumpling 🥟</h1>
+    <p>Discover Chinese dramas that match your mood</p>
+    <div class="hero-badge" id="randomTip">
+      ✨ click for a surprise ✨
+    </div>
+  </div>
+
+  <div class="main-container">
+    <!-- Vibe Selection -->
+    <div class="vibe-section">
+      <div class="section-title">
+        <span>🎀</span>
+        <h2>what's your mood today?</h2>
+      </div>
+      <div class="vibe-grid">
+        <div class="vibe-card" data-vibe="romance">
+          <span class="vibe-emoji">🌸</span>
+          <div class="vibe-name">Sweet Romance</div>
+        </div>
+        <div class="vibe-card" data-vibe="angst">
+          <span class="vibe-emoji">💔</span>
+          <div class="vibe-name">Heart-Wrenching Angst</div>
+        </div>
+        <div class="vibe-card" data-vibe="palace">
+          <span class="vibe-emoji">👑</span>
+          <div class="vibe-name">Palace Power Struggle</div>
+        </div>
+        <div class="vibe-card" data-vibe="fantasy">
+          <span class="vibe-emoji">✨</span>
+          <div class="vibe-name">Xianxia Fantasy</div>
+        </div>
+        <div class="vibe-card" data-vibe="comedy">
+          <span class="vibe-emoji">😄</span>
+          <div class="vibe-name">Light Comedy</div>
+        </div>
+        <div class="vibe-card" data-vibe="historical">
+          <span class="vibe-emoji">🏯</span>
+          <div class="vibe-name">Historical Epic</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Drama Display -->
+    <div class="drama-section">
+      <div class="drama-container">
+        <div class="poster-wrapper">
+          <img id="poster" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='340' viewBox='0 0 240 340'%3E%3Crect width='240' height='340' fill='%233a2c2c'/%3E%3Ctext x='120' y='170' font-family='Arial' font-size='48' fill='%23ffb7c3' text-anchor='middle'%3E🥟%3C/text%3E%3C/svg%3E" alt="Drama Poster">
+        </div>
+        <div class="drama-info-large">
+          <div id="title">pick a mood to start ✨</div>
+          <div class="rating-large">
+            <span id="rating">♥ ♥ ♥</span>
+          </div>
+          <div id="vibe-tag"></div>
+          <div class="action-buttons">
+            <button class="btn-primary" id="findDrama" disabled>✨ find drama ✨</button>
+            <button class="btn-secondary" id="saveDrama" disabled>📌 save to list</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Watchlist -->
+    <div class="watchlist-section">
+      <div class="watchlist-header">
+        <h3>📋 my watchlist</h3>
+        <div class="watchlist-actions">
+          <button class="icon-btn" id="shareListBtn">📤 share list</button>
+          <button class="icon-btn" id="clearListBtn">🗑️ clear all</button>
+        </div>
+        <span class="watchlist-count" id="watchlistCount">0</span>
+      </div>
+      <ul id="watchlist">
+        <li class="empty-message">✨ your watchlist is waiting to be filled ✨</li>
+      </ul>
+    </div>
+
+    <!-- News & Facts Section -->
+    <div class="news-section">
+      <div class="news-header">
+        <h3>📰 C-Drama Buzz</h3>
+        <div class="news-buttons">
+          <button class="icon-btn" id="refreshNewsBtn">🔄 refresh</button>
+          <button class="icon-btn" id="funFactBtn">🎭 fun fact</button>
+        </div>
+      </div>
+      <div class="news-content">
+        <div id="newsList" class="news-list">
+          <div class="loading-news">📡 fetching latest news...</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>💗 powered by TMDB | made with love for c-drama lovers</span>
+  </div>
+
+  <script src="app.js"></script>
+  <script>
+    // Random tip generator for the badge
+    const tips = [
+      '🌸 Try Sweet Romance for heart-fluttering love stories!',
+      '💔 Feeling emotional? Angst vibes are waiting!',
+      '👑 Love palace intrigue? You\'ll love this vibe!',
+      '✨ Fantasy lovers, this one\'s for you!',
+      '😄 Need a laugh? Comedy mode activated!',
+      '🏯 History buff? Epic tales await!',
+      '🥟 Drama Dumpling finds your perfect match!',
+      '💕 Save your favorites to your watchlist!',
+      '📤 Share your list with fellow drama lovers!'
+    ];
+    
+    document.getElementById('randomTip').addEventListener('click', () => {
+      const randomTip = tips[Math.floor(Math.random() * tips.length)];
+      const toast = document.createElement('div');
+      toast.className = 'toast';
+      toast.textContent = randomTip;
+      document.body.appendChild(toast);
+      setTimeout(() => toast.remove(), 3000);
+    });
+  </script>
+</body>
+</html>

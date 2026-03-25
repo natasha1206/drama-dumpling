@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>C-Drama Nomad Explorer</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      width: 380px;
+      min-height: 580px;
+      background: linear-gradient(135deg, #2d2a2a 0%, #4a3b3b 100%);
+      font-family: 'Segoe UI', 'Quicksand', -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+      color: #f0e0d0;
+      padding: 20px;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    /* Header */
+    .header {
+      text-align: center;
+      padding-bottom: 12px;
+    }
+
+    .header h1 {
+      font-size: 22px;
+      font-weight: 600;
+      background: linear-gradient(135deg, #ffb7c3 0%, #ffd4a5 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: 1px;
+    }
+
+    .header p {
+      font-size: 12px;
+      color: #d4b5a5;
+      margin-top: 6px;
+    }
+
+    /* Vibe Selector */
+    .vibe-section {
+      background: rgba(45, 35, 35, 0.85);
+      border-radius: 24px;
+      padding: 16px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 183, 195, 0.3);
+      backdrop-filter: blur(4px);
+    }
+
+    .vibe-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 14px;
+      color: #ffb7c3;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .vibe-title span {
+      font-size: 20px;
+    }
+
+    .vibe-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    .vibe-btn {
+      background: rgba(30, 25, 25, 0.9);
+      color: #f0d0c0;
+      border: 1px solid #6a4e4e;
+      padding: 8px 14px;
+      border-radius: 30px;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: inherit;
+    }
+
+    .vibe-btn:hover {
+      background: #6a4e4e;
+      border-color: #ffb7c3;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .vibe-btn.active {
+      background: linear-gradient(135deg, #ff9a9e 0%, #ffb7c3 100%);
+      color: #2d2a2a;
+      border-color: transparent;
+      box-shadow: 0 4px 12px rgba(255, 154, 158, 0.4);
+    }
+
+    /* Drama Card */
+    .drama-card {
+      background: rgba(45, 35, 35, 0.9);
+      border-radius: 28px;
+      padding: 20px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s ease;
+      border: 1px solid rgba(255, 183, 195, 0.3);
+      backdrop-filter: blur(4px);
+    }
+
+    .drama-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .poster-container {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+
+    #poster {
+      max-width: 150px;
+      max-height: 210px;
+      border-radius: 18px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      object-fit: cover;
+      transition: all 0.3s ease;
+    }
+
+    #poster:hover {
+      transform: scale(1.02);
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
+    }
+
+    .drama-info {
+      text-align: center;
+      margin-bottom: 18px;
+    }
+
+    #title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #f0e0d0;
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+
+    #rating {
+      color: #ffb7c3;
+      font-size: 14px;
+      font-weight: 500;
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 4px 12px;
+      border-radius: 20px;
+    }
+
+    #rating::before {
+      content: "♥ ";
+      color: #ff9a9e;
+      font-size: 12px;
+    }
+
+    #vibe-tag {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.1);
+      color: #ffb7c3;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 11px;
+      margin-top: 10px;
+      font-weight: 500;
+    }
+
+    .button-group {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      background: linear-gradient(135deg, #ff9a9e 0%, #ffb7c3 100%);
+      color: #2d2a2a;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 30px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: inherit;
+      letter-spacing: 0.5px;
+    }
+
+    .btn:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(255, 154, 158, 0.5);
+    }
+
+    .btn:active:not(:disabled) {
+      transform: translateY(0);
+    }
+
+    .btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .btn-secondary {
+      background: rgba(30, 25, 25, 0.9);
+      color: #ffb7c3;
+      border: 1px solid #ffb7c3;
+    }
+
+    .btn-secondary:hover:not(:disabled) {
+      background: #6a4e4e;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Watchlist Section */
+    .watchlist-section {
+      background: rgba(45, 35, 35, 0.85);
+      border-radius: 24px;
+      padding: 16px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 183, 195, 0.3);
+      backdrop-filter: blur(4px);
+    }
+
+    .watchlist-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      color: #ffb7c3;
+      font-weight: 600;
+      border-bottom: 2px solid rgba(255, 183, 195, 0.3);
+      padding-bottom: 10px;
+    }
+
+    .watchlist-header h2 {
+      font-size: 15px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .watchlist-header h2::before {
+      content: "📋";
+      font-size: 16px;
+    }
+
+    .watchlist-count {
+      background: #ffb7c3;
+      color: #2d2a2a;
+      padding: 2px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .watchlist-actions {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .icon-btn {
+      background: rgba(30, 25, 25, 0.9);
+      border: 1px solid #6a4e4e;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      color: #ffb7c3;
+      font-weight: 500;
+    }
+
+    .icon-btn:hover {
+      background: #6a4e4e;
+      border-color: #ffb7c3;
+      transform: translateY(-1px);
+    }
+
+    #watchlist {
+      list-style: none;
+      max-height: 150px;
+      overflow-y: auto;
+    }
+
+    #watchlist li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 12px;
+      margin-bottom: 8px;
+      background: rgba(30, 25, 25, 0.7);
+      border-radius: 16px;
+      font-size: 13px;
+      color: #f0e0d0;
+      transition: all 0.2s ease;
+      border: 1px solid #6a4e4e;
+    }
+
+    #watchlist li:hover {
+      border-color: #ffb7c3;
+      transform: translateX(3px);
+      background: rgba(106, 78, 78, 0.5);
+    }
+
+    .remove-btn {
+      background: none;
+      border: none;
+      color: #ffb7c3;
+      cursor: pointer;
+      font-size: 16px;
+      padding: 0 6px;
+      transition: all 0.2s ease;
+      font-weight: 600;
+    }
+
+    .remove-btn:hover {
+      color: #ff6b6b;
+      transform: scale(1.1);
+    }
+
+    .vibe-badge {
+      font-size: 11px;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 3px 8px;
+      border-radius: 20px;
+      margin-left: 8px;
+    }
+
+    .empty-message {
+      text-align: center;
+      color: #d4a5a5;
+      font-style: italic;
+      padding: 20px;
+      font-size: 12px;
+    }
+
+    .footer {
+      text-align: center;
+      font-size: 10px;
+      color: #d4a5a5;
+      margin-top: 6px;
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #2d2a2a;
+      color: #ffb7c3;
+      padding: 8px 16px;
+      border-radius: 30px;
+      font-size: 12px;
+      z-index: 1000;
+      animation: fadeInUp 0.3s ease;
+      border: 1px solid #ffb7c3;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+      }
+    }
+
+    /* Scrollbar Styling */
+    ::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #3a2e2e;
+      border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #ffb7c3;
+      border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #ff9a9e;
+    }
+
+    .error {
+      color: #ff9a9e;
+      text-align: center;
+      padding: 10px;
+      border-radius: 20px;
+      background: rgba(255, 100, 100, 0.1);
+      margin-bottom: 12px;
+      font-size: 12px;
+      border: 1px solid #ff9a9e;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>✨ C-Drama Nomad ✨</h1>
+      <p>find your next favorite drama</p>
+    </div>
+
+    <!-- Vibe Selector -->
+    <div class="vibe-section">
+      <div class="vibe-title">
+        <span>🎀</span> what's your mood today?
+      </div>
+      <div class="vibe-buttons">
+        <button class="vibe-btn" data-vibe="romance">🌸 Sweet Romance</button>
+        <button class="vibe-btn" data-vibe="angst">💔 Heart-Wrenching Angst</button>
+        <button class="vibe-btn" data-vibe="palace">👑 Palace Power Struggle</button>
+        <button class="vibe-btn" data-vibe="fantasy">✨ Xianxia Fantasy</button>
+        <button class="vibe-btn" data-vibe="comedy">😄 Light Comedy</button>
+        <button class="vibe-btn" data-vibe="historical">🏯 Historical Epic</button>
+      </div>
+    </div>
+
+    <!-- Drama Card -->
+    <div class="drama-card">
+      <div class="poster-container">
+        <img id="poster" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='200' viewBox='0 0 150 200'%3E%3Crect width='150' height='200' fill='%23fce4ec'/%3E%3Ctext x='75' y='100' font-family='Arial' font-size='12' fill='%23ffb7c3' text-anchor='middle'%3E🌸 pick a vibe 🌸%3C/text%3E%3C/svg%3E" alt="Drama Poster">
+      </div>
+      <div class="drama-info">
+        <div id="title">waiting for your choice...</div>
+        <div id="rating">♥ ♥ ♥</div>
+        <div id="vibe-tag"></div>
+      </div>
+      <div class="button-group">
+        <button class="btn" id="findDrama" disabled>find drama</button>
+        <button class="btn" id="saveDrama" disabled>save to list</button>
+      </div>
+    </div>
+
+    <!-- Watchlist with Share Feature -->
+    <div class="watchlist-section">
+      <div class="watchlist-header">
+        <h2>my watchlist</h2>
+        <span class="watchlist-count" id="watchlistCount">0</span>
+      </div>
+      <div class="watchlist-actions">
+        <button class="icon-btn" id="shareListBtn">📤 share list</button>
+        <button class="icon-btn" id="clearListBtn">🗑️ clear all</button>
+      </div>
+      <ul id="watchlist">
+        <li class="empty-message">your watchlist is waiting to be filled ✨</li>
+      </ul>
+    </div>
+    
+    <div class="footer">
+      <span>💗 powered by TMDB | made with love for c-drama lovers</span>
+    </div>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
